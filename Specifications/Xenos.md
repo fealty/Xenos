@@ -56,4 +56,12 @@ Xenos source files are lists of items delimited by blank lines. The types of the
 
 #### Text Mode
 
-By default, all source files begin in text mode. They are given an implicit **TextModeAttribute** at the beginning of the file. This mode treats all items as implicit textual markup paragraphs, wrapping them with `\paragraph{<item data>}`. Any embedded code expressions, as denoted by unescaped (), will evaluate down to text instead of their object representations.
+By default, all source files begin in text mode. They are given an implicit **TextModeAttribute** at the beginning of the file. This mode treats all items as implicit textual markup paragraphs, wrapping them with `\paragraph{<item data>}`. Any embedded code expressions, as denoted by unescaped `()`, will evaluate down to text instead of their object representations.
+
+> We have two broad goals in mind for Xenos: you can write a novel in it; you can write a video game in it. By choosing text mode as the default, we enable not only writing novels but encourage programmers to use literate programming to write their software. We allow embedded code expressions to allow for REPL and any kind of advanced text generation like a unit test report.
+
+#### Code Mode
+
+When implementations encounter an attribute derived from **CodeModeAttribute**, implementations will switch to code mode. This mode treats all items exactly as they appear. Unlike text mode, code mode does not wrap items in any implicit context. This forbids writing paragraphs unless they are enclosed by an explicit `\paragraph{}`, but it allows code objects to evaluate to their object representations. When implementations encounter two or more consecutive blank lines, implementations must switch back to text mode. The end of files may also end the mode.
+
+> Text mode alone doesn't allow us to create programs because everything evaluates to text, not executable code. Code mode allows us to define functions on modules, types on modules, in addition to data like lists and hash tables. You know, the stuff that should actually get compiled.
