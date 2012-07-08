@@ -1,4 +1,4 @@
-# Xenos - Language Specification
+# Xenos: Language Specification
 
 *the stranger language...*
 
@@ -92,4 +92,39 @@ To make attributes distinct from normal function calls, implementations must imp
 
 ```
 @<attribute-type> [<optional-arguments>]* (<required-arguments>*)?
+```
+
+The attribute form transforms into the basic construction form as follows:
+
+```
+(new <attribute-type> <optional-arguments> <required-arguments>)
+```
+
+> We wanted attributes to stand out in both code and text. They also needed a unique syntactic sugar to avoid having to new them manually.
+
+#### Text Markup Form
+
+Xenos programs require large amounts of text. For this purpose, implementations must implement the text markup form as follows: a single backslash followed by the *markup type*; zero or more spaces; zero or more *optional arguments*, each enclosed by a set of brackets; zero or more spaces; a set of braces if *nested markup* is given.
+
+```
+\<markup-type> [<optional-arguments>]* {<nested-markup>}?
+```
+
+The text markup form itself transforms down into the following:
+
+```
+(new <markup-type> <optional-arguments> <required arguments>)
+```
+
+For example, consider the following line of nested markup:
+
+```
+\paragraph{Hello, this is a paragraph of \emphasize{nested markup} text.}
+```
+
+The markup form treats everything aside from other forms as text, so in basic form, the above becomes as follows:
+
+```
+(new paragraph “Hello, this is a paragraph of ” 
+  (new emphasize “nested markup”) “text.”)
 ```
