@@ -85,3 +85,11 @@ The basic form of all function calls is defined as follows within opening and cl
 ```
 
 > We chose s-expressions because they are easy to parse. In order to support assigning attributes to arbitrary data structures---methods, parameters, member variables, etc.---we have chosen to allow attributes to be given in the s-expression and passed along to the function when evaluation occurs. This allows attributes to be used on s-expressions at compile time and pass through to arbitrary objects for application to compilation.
+
+#### Attribute Form
+
+To make attributes distinct from normal function calls, implementations must implement the attribute form in addition to the basic form as follows: the *at-sign* followed immediately by the *attribute type*; one or more white space characters; zero or more *optional arguments*; one or more white space characters if optional arguments are given; zero or one parenthetical set enclosing zero or more *required arguments*.
+
+```
+@<attribute-type> [<optional-arguments>]* (<required-arguments>*)?
+```
