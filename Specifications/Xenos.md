@@ -128,3 +128,7 @@ The markup form treats everything aside from other forms as text, so in basic fo
 (new paragraph “Hello, this is a paragraph of ” 
   (new emphasize “nested markup”) “text.”)
 ```
+
+> We needed a way to build trees of text markup. The text markup form easily enables this, solving the problem of including large amounts of semantic text.
+
+#### Replacement Form
