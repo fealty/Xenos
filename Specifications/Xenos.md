@@ -132,3 +132,18 @@ The markup form treats everything aside from other forms as text, so in basic fo
 > We needed a way to build trees of text markup. The text markup form easily enables this, solving the problem of including large amounts of semantic text.
 
 #### Replacement Form
+
+To enable literate programming within modules, implementations must provide the s-expression replacement form, which is defined as follows: the dollar sign followed by a *function* that returns an s-expression; zero or more spaces; zero or more *optional arguments*, each enclosed in a set of brackets; zero or more spaces; zero or one set of parentheses having zero or more *required arguments* enclosed. 
+
+```
+$<function> [<optional-arguments>]* (<required-arguments>)?
+```
+
+This form transforms down into the following immediately after the AST is built for its containing module item:
+
+```
+(<function> [<optional arguments>]* <required-arguments>)
+```
+
+> We need a way to include chunks of code by name, so we devised the replacement form as a special function call always evaluated immediately after an module item's AST is fully built. This enables users to include chunks of AST from within the module and from dependent modules.
+
