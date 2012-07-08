@@ -50,4 +50,10 @@ Namespaces are a logical abstraction for grouping available data and code into h
 
 ## Syntax
 
+### Definition Modes
 
+Xenos source files are lists of items delimited by blank lines. The types of these items, excepting attributes, depends not only on the code used to create them, but the current definition mode of the implementation.
+
+#### Text Mode
+
+By default, all source files begin in text mode. They are given an implicit **TextModeAttribute** at the beginning of the file. This mode treats all items as implicit textual markup paragraphs, wrapping them with `\paragraph{<item data>}`. Any embedded code expressions, as denoted by unescaped (), will evaluate down to text instead of their object representations.
