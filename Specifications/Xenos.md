@@ -75,3 +75,11 @@ When implementations encounter an attribute derived from **DataModeAttribute**, 
 ### Everything is a Function Call
 
 All Xenos syntax transforms down into built-in and user-defined function calls. 
+
+#### Basic Function Form
+
+The basic form of all function calls is defined as follows within opening and closing parentheses: zero or more *attributes*, each enclosed by a set of brackets; one or more characters of white space if attributes are given; the *function identifier* for the function being called; one or more characters of white space; zero or more *optional arguments*, each enclosed by a set of brackets; one or more characters of white space if optional arguments are given; and zero or more *required arguments*.
+
+```
+([<attribute>]* <function-identifier> [<optional-argument>]* <required-arguments>*)
+```
