@@ -83,3 +83,5 @@ The basic form of all function calls is defined as follows within opening and cl
 ```
 ([<attribute>]* <function-identifier> [<optional-argument>]* <required-arguments>*)
 ```
+
+> We chose s-expressions because they are easy to parse. In order to support assigning attributes to arbitrary data structures---methods, parameters, member variables, etc.---we have chosen to allow attributes to be given in the s-expression and passed along to the function when evaluation occurs. This allows attributes to be used on s-expressions at compile time and pass through to arbitrary objects for application to compilation.
