@@ -12,7 +12,7 @@ The layout of source files and dependencies in projects on the native file syste
 
 Source files are UTF-8 text files (without the byte order mark) having the `.xs` file extension. Implementations must emit errors when they encounter byte order marks in source files, non-UTF-8 encoding schemes, or files lacking the `.xs` file extension.
 
-> We chose UTF-8 because it is popular and interoperable with legacy encodings. Specifications should not require implementations to support multiple text encodings when one encoding---UTF-8---will work just fine. That said, byte order marks in UTF-8 are silly; implementations should not have to define their own behavior for that silly thing, so we mandate its omission from source files. We do not like the C++ litany of source file extension confusion: .hpp, .c, .h, .cxx, .cpp, etc. The specification should enable tools to identify source files by their file extension.
+> We chose UTF-8 because it is popular and interoperable with legacy encodings. Specifications should not require implementations to support multiple text encodings when one encoding--UTF-8--will work just fine. That said, byte order marks in UTF-8 are silly; implementations should not have to define their own behavior for that silly thing, so we mandate its omission from source files. We do not like the C++ litany of source file extension confusion: .hpp, .c, .h, .cxx, .cpp, etc. The specification should enable tools to identify source files by their file extension.
 
 #### Modules
 
