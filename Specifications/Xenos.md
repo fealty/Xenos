@@ -71,3 +71,7 @@ When implementations encounter an attribute derived from **CodeModeAttribute**, 
 When implementations encounter an attribute derived from **DataModeAttribute**, implementations will switch to data mode. This mode treats all of the content as a verbatim string by default, but users can supply a **DataModeProvider** that provides an interface to the data. This interface can be accessed elsewhere in the source files. When implementations encounter three or more consecutive blank lines, implementations must switch back to text mode. The end of files may also end the mode.
 
 > We intend to allow the embedding of any textual content within source files. Users can embed XML data or code from another language if they wish. Our **DataModeProvider** enables code to access non-Xenos data at compile time through Xenos interfaces. We believe this is a very useful feature. This may be a generalization of text mode. If possible, we should look into implementing text mode through the use of data mode.
+
+### Everything is a Function Call
+
+All Xenos syntax transforms down into built-in and user-defined function calls. 
