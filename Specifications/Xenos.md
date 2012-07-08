@@ -1,4 +1,4 @@
-# Xenos
+# Xenos - Language Specification
 
 *the stranger language...*
 
