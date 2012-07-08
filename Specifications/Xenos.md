@@ -65,3 +65,9 @@ By default, all source files begin in text mode. They are given an implicit **Te
 When implementations encounter an attribute derived from **CodeModeAttribute**, implementations will switch to code mode. This mode treats all items exactly as they appear. Unlike text mode, code mode does not wrap items in any implicit context. This forbids writing paragraphs unless they are enclosed by an explicit `\paragraph{}`, but it allows code objects to evaluate to their object representations. When implementations encounter two or more consecutive blank lines, implementations must switch back to text mode. The end of files may also end the mode.
 
 > Text mode alone doesn't allow us to create programs because everything evaluates to text, not executable code. Code mode allows us to define functions on modules, types on modules, in addition to data like lists and hash tables. You know, the stuff that should actually get compiled.
+
+#### Data Mode
+
+When implementations encounter an attribute derived from **DataModeAttribute**, implementations will switch to data mode. This mode treats all of the content as a verbatim string by default, but users can supply a **DataModeProvider** that provides an interface to the data. This interface can be accessed elsewhere in the source files. When implementations encounter three or more consecutive blank lines, implementations must switch back to text mode. The end of files may also end the mode.
+
+> We intend to allow the embedding of any textual content within source files. Users can embed XML data or code from another language if they wish. Our **DataModeProvider** enables code to access non-Xenos data at compile time through Xenos interfaces. We believe this is a very useful feature. This may be a generalization of text mode. If possible, we should look into implementing text mode through the use of data mode.
