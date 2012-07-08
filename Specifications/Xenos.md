@@ -1,6 +1,6 @@
 # Xenos
 
-*The Stranger Language*
+*the stranger language...*
 
 ## Program Structure
 
