@@ -4,7 +4,7 @@ Xenos is *the stranger language* intended to enable programmers to write softwar
 
 ## Program Structure
 
-The structure of Xenos programs consist of two parts: physical structure and logical structure. The physical structure requirements describe the arrangement of program source files on the native file system. The logical structure requirements describe the program structure formed by the contents of a program's physical elements. Implementations must implement all requirements in both sections.
+The structure of Xenos programs consist of two parts: physical structure and logical structure. The physical structure requirements describe how the arrangement of program source files on the native file system forms the physical structure of Xenos programs. The logical structure requirements describe how the contents of a program's physical elements form the logical structure of Xenos programs. Implementations must implement all requirements in both sections.
 
 ### Physical Structure
 
