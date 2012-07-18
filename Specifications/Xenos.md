@@ -1,8 +1,6 @@
-# Xenos: Language Specification
+# The Xenos Language Specification
 
-*the stranger language...*
-
-This document describes the Xenos language for implementation by compiler writers.
+Xenos is *the stranger language...* intended to enable programmers to write computer software using the *literate programming* paradigm. Xenos programs are documents first, programs second. The remainder of this document describes the Xenos language for implementation by compiler writers, but advanced users may find the contents of benefit.
 
 ## Program Structure
 
