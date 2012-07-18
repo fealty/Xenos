@@ -2,7 +2,11 @@
 
 *the stranger language...*
 
+This document describes the Xenos language for implementation by compiler writers.
+
 ## Program Structure
+
+The structure of Xenos programs consists of two parts: physical structure and logical structure. The physical structure requirements describe the arrangement of program sources on the native file system. The logical structure requirements describe the program structure built internally by an implementation.
 
 ### Physical Structure
 
@@ -16,7 +20,7 @@ Source files are UTF-8 text files (without the byte order mark) having the `.xs`
 
 #### Modules
 
-Modules group code and data Source files and modules have a relationship, but source files are not modules: Source files *describe* modules. Only module identifiers derive from the physical source files. Implementations must derive module identifiers as follows: strip the file system path; strip the file extension as denoted by the final dot; and replace all lexically invalid identifier characters with hyphens. For example, given the source file My `File.xdoc.xs`, implementations will produce `My-File-xdoc` as the module identifier.
+Modules group code and data. Source files and modules have a relationship, but source files are not modules: Source files *describe* modules. Only module identifiers derive from the physical source files. Implementations must derive module identifiers as follows: strip the file system path; strip the file extension as denoted by the final dot; and replace all lexically invalid identifier characters with hyphens. For example, given the source file My `File.xdoc.xs`, implementations will produce `My-File-xdoc` as the module identifier.
 
 > Editors should display filenames with sub-extensions, such as the one in our example above, as children of the main .xs file. These files may be generated from the main .xs file, but they always indicate that the child file depends upon the parent.
 
