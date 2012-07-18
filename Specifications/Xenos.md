@@ -12,7 +12,7 @@ Xenos programs maintain consistency between the native file system representatio
 
 #### Source Files
 
-Source files are UTF-8 text files (without the byte order mark), containing Xenos source code, that have the `.xs` file extension. Implementations must accept source file names as the default argument to compiler invocation from the command line, but they may provide additional input paths. When processing the given source files, implementations must error when they encounter any of the following conditions:
+Source files are UTF-8 text files (without the byte order mark), containing Xenos source code, that have the `.xs` file extension. Implementations must accept source file names as the default argument to compiler invocation from the command line, and they may provide additional input paths. When processing the given source files, implementations must error when they encounter any of the following conditions:
 
 * One or more source inputs contain byte order marks.
 * One or more source inputs use non-UTF-8 encoding schemes.
