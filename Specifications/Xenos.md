@@ -17,8 +17,9 @@ Source files are UTF-8 text files (without the byte order mark), containing Xeno
 * One or more source inputs contain byte order marks.
 * One or more source inputs use non-UTF-8 encoding schemes.
 * One or more source inputs lack the `.xs` file extension.
+* One or more related failures as determined by the implementation.
 
-Implementations may provide additional input paths for source code without violating this specification provided the above conditions hold. These provisions are additive to other error conditions implementations may encounter, which may include things like corrupt files.
+Implementations may provide additional input paths for source code without violating this specification provided the above conditions hold.
 
 #### Modules
 
