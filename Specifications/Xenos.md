@@ -21,7 +21,7 @@ Source files are UTF-8 text files (without the byte order mark), containing Xeno
 
 #### Modules
 
-Modules group related code and data as determined by programmers or writers. Modules are not source files; source files *describe* modules. Modules are primarily logical but derive their identifiers from the physical source files: Implementations must derive module identifiers by stripping the file system path, stripping the file extension, and replacing all lexically invalid identifier characters with underscores. For example, give the source file `My File.xdoc.xs`, implementations will derive `My_File_xdoc` as the module identifier.
+Modules group related code and data as determined by programmers or writers. Modules are not source files; source files *describe* modules. Modules are primarily logical but derive their identifiers from the physical source files: Implementations must derive module identifiers by stripping the file system path, stripping the file extension, and replacing all lexically invalid identifier characters with underscores. For example, given the source file `My File.xdoc.xs`, implementations will derive `My_File_xdoc` as the module identifier.
 
 #### Namespaces
 
