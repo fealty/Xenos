@@ -8,7 +8,7 @@ The structure of Xenos programs consists of two parts: physical structure and lo
 
 ### Physical Structure
 
-To maintain consistency between the file system representation and physical structure, Xenos programs derive their physical structure from the presence or arrangement of files and directories on the native file system. These physical structural aspects include source files, modules, namespaces, and libraries.
+Xenos programs maintain consistency between the native file system representation and physical structure by deriving their physical structures from the presence or arrangement of source files and directories. Elements of physical structure include source files, modules, namespaces, and libraries.
 
 #### Source Files
 
