@@ -1,6 +1,6 @@
 # The Xenos Language Specification
 
-Xenos is *the stranger language* intended to enable programmers to write computer software using the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by overturning the conventional paradigms in each craft. The remainder of this document describes the Xenos language for implementation by compiler writers.
+Xenos is *the stranger language* intended to enable programmers to write software using the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by overturning the conventional paradigms in each craft. The remainder of this document describes the Xenos language for implementation by compiler writers.
 
 ## Program Structure
 
