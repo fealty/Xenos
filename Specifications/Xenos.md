@@ -8,7 +8,7 @@ The structure of Xenos programs consists of two parts: physical structure and lo
 
 ### Physical Structure
 
-Xenos programs maintain consistency between the native file system representation and physical structure by deriving their physical structures from the presence or arrangement of source files and directories. This consistency ensures that programs will not accidentally create a physical or logical structure vastly different from how a Xenos program is viewed from within source code control.
+Xenos programs maintain consistency between the native file system representation and physical structure by deriving their physical structures from the presence or arrangement of source files and directories. This consistency ensures that programs will not accidentally create a physical or logical structure vastly different from how a Xenos program is viewed from within source code management solutions like Git.
 
 #### Source Files
 
