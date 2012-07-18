@@ -6,7 +6,7 @@ This document describes the Xenos language for implementation by compiler writer
 
 ## Program Structure
 
-The structure of Xenos programs consists of two parts: physical structure and logical structure. The physical structure requirements describe the arrangement of program sources on the native file system. The logical structure requirements describe the program structure built internally by an implementation.
+The structure of Xenos programs consists of two parts: physical structure and logical structure. The physical structure requirements describe the arrangement of program sources on the native file system. The logical structure requirements describe the program structure built internally by implementations.
 
 ### Physical Structure
 
