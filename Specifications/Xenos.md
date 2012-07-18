@@ -20,9 +20,7 @@ Modules group related code and data as determined by programmers or writers. Mod
 
 #### Namespaces
 
-Namespaces, like file system directories, group things (see [sub:Namespaces] for the comprehensive definition.) As such, implementations must treat directories as namespaces. The root directories of projects represent the global namespace. Directories within the root directories form the physical namespace hierarchies for projects. Implementations must derive namespace identifiers from directory names as follows: strip the file system path relative to the current directory and replace all lexically invalid identifier characters with hyphens. For example, given the source file `./Frost Test/Shaping.xs`, implementations will determine that `Shaping.xs` resides within the `Frost-Test` namespace.
-
-> We chose to use directories as namespaces to guarantee consistency between the physical and logical structures of Xenos programs. This consistency eases navigation and understanding when viewing source files through version control systems. This approach also makes it impossible to pollute the global namespace, which we reserve for specification and implementation use only.
+Namespaces, like file system directories, group things. As such, implementations must treat directories as namespaces. The root directories of projects represent the global namespace for each project. Directories within the root directories form the physical namespace hierarchies for projects. Implementations must derive namespace identifiers from directory names by stripping the file system path relative to the current directory and replacing all lexically invalid identifier characters with underscores. For example, give the source file `./Frost Test/Shaping.xs`, implementations will determine that the `Shaping` module resides within the `Frost_Test` namespace.
 
 #### Libraries
 
