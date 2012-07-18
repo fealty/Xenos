@@ -1,10 +1,10 @@
 # The Xenos Language Specification
 
-Xenos is *the stranger language* intended to enable programmers to write software via the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by inverting the conventional paradigms of each craft. The remainder of this document describes the Xenos language for implementation by compiler writers.
+Xenos is *the stranger language* intended to enable programmers to write software via the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by inverting the conventional paradigms of each craft. The remainder of this document describes the Xenos language for implementation by compiler writers. Newbies to the language should read the introductory tutorials first.
 
 ## Program Structure
 
-The structure of Xenos programs consist of two parts: physical structure and logical structure. The physical structure requirements describe how the arrangement of program source files on the native file system forms the physical structure of Xenos programs. The logical structure requirements describe how the contents of a program's physical elements form the logical structure of Xenos programs. Implementations must implement all requirements in both sections.
+The structure of Xenos programs consists of two parts: physical structure and logical structure. The physical structure requirements describe how the arrangement of source files on the native file system forms the physical structure. The logical structure requirements describe how the contents of physical elements, such as source files, form the logical structure.
 
 ### Physical Structure
 
