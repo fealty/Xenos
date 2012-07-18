@@ -10,7 +10,7 @@ The structure of Xenos programs consists of two parts: physical structure and lo
 
 ### Physical Structure
 
-The layout of source files and dependencies in projects on the native file system forms the physical structure of Xenos programs.
+The physical structure of Xenos programs consists of four parts: source files, modules, namespaces, and libraries. Each of these aspects depends upon the arrangement of files or directories on the native file system.
 
 #### Source Files
 
