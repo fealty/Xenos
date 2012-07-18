@@ -15,6 +15,7 @@ To maintain consistency between the file system representation and physical stru
 Source files are UTF-8 text files (without the byte order mark), containing Xenos source code, that have the `.xs` file extension. Implementations must error when they encounter byte order marks in source files, non-UTF-8 encoding schemes, or files lacking the `.xs` file extension. Implementation input paths that take UTF-8 source code via methods other than files may ignore the file extension restriction. Implementations must accept source file names as the default parameter to compiler invocation from the command line. This specification does not require or prohibit other source code input paths or methods.
 
 #### Modules
+TODO:
 
 Modules group code and data. Source files and modules have a relationship, but source files are not modules: Source files *describe* modules. Only module identifiers derive from the physical source files. Implementations must derive module identifiers as follows: strip the file system path; strip the file extension as denoted by the final dot; and replace all lexically invalid identifier characters with hyphens. For example, given the source file My `File.xdoc.xs`, implementations will produce `My-File-xdoc` as the module identifier.
 
