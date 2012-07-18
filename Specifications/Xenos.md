@@ -24,9 +24,7 @@ Namespaces, like file system directories, group things. As such, implementations
 
 #### Libraries
 
-Libraries are implementation dependent collections of data and code that Xenos sources can interoperate with through the implementation. The use of such libraries necessarily ties source files to particular implementations. Implementations must expose library members through the use of logical namespaces.
-
-> For now, we leave the majority of this functionality up to the implementation. In later revisions, we may require a platform such as LLVM, .NET, or Parrot, which would necessitate further definition.
+Libraries are .NET assemblies, which may be provided to implementations via a command line switch. Implementations should first check locally for assemblies before looking in the global assembly cache. Implementations must expose library members through the use of logical namespaces.
 
 ### Logical Structure
 
