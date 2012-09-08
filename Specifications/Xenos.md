@@ -1,3 +1,5 @@
+> Consider just adopting the .NET type system verbatim?
+
 # The Xenos Language Specification
 
 Xenos is *the stranger language* intended to enable programmers to write software via the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by inverting the conventional paradigms of each craft. The remainder of this document describes the Xenos language for implementation by compiler writers. Newbies to the language should read the introductory tutorials first.
