@@ -10,7 +10,7 @@ The structure of Xenos programs consists of two parts: physical structure and lo
 
 ### Physical Structure
 
-Xenos programs maintain consistency between the native file system representation and physical structure by deriving their physical structures from the presence or arrangement of source files and directories. This consistency ensures that programs will not accidentally create a physical or logical structure vastly different from how a Xenos program is viewed from within source code management solutions like Git.
+Xenos programs maintain consistency between the native file system representation and physical structure by deriving their physical structures from the presence or arrangement of source files and directories. This consistency ensures that programs will not accidentally create a physical or logical structure vastly different from how a complex Xenos program is viewed from within source code management solutions like Git.
 
 #### Source Files
 
@@ -31,7 +31,7 @@ Namespaces, like file system directories, group things. As such, implementations
 
 #### Libraries
 
-Libraries are .NET assemblies, which may be provided to implementations via a command line switch. Implementations should first check locally for assemblies before looking in the global assembly cache. Implementations must expose library members through the use of logical namespaces.
+Libraries are .NET assemblies, which may be provided to implementations via a command line switch. Implementations should first check provided assemblies before looking in the global assembly cache. Implementations must expose all provided library members through the use of logical namespaces.
 
 ### Logical Structure
 
@@ -39,11 +39,11 @@ The dependencies between modules, namespaces, and libraries form the logical str
 
 #### Modules
 
-Modules are named scopes that list available code and data items. Every Xenos program has one master module that serves as the starting point to compilation, and every module thereafter must be processed once regardless of how many times the module is imported elsewhere. By recursively following import declarations, implementations build acyclic dependency trees for Xenos programs. Implementations must detect and emit errors when they encounter cycles between modules.
+Modules are named scopes that list available code and data items. Every Xenos program has one master module that serves as the starting point to compilation, and every module thereafter must be processed only once, regardless of how many modules import each module. By recursively following import declarations, implementations build acyclic dependency trees for Xenos programs. Implementations must detect and emit errors when they encounter cycles between modules.
 
 #### Namespaces
 
-Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file `./Frost Test/Shaping.xs`, implementations will determine that the Shaping module resides within the `Frost_Test.Shaping` namespace. Implementations must maintain lists of all namespaces available in referenced libraries and the physical structure of the current project.
+Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file `./Frost Test/Shaping.xs`, implementations will determine that the Shaping module resides within the `Frost_Test.Shaping` namespace. Implementations must maintain lists of all namespaces available in referenced libraries and in the physical structure of the current project.
 
 ## Syntax
 
