@@ -53,6 +53,8 @@ Namespaces are a logical abstraction for grouping available data and code into h
 
 ### Definition Modes
 
+> Are these items blocks? Text Blocks are built-in Data Blocks. Code Blocks are the other block type?
+
 Xenos source files are lists of items delimited by blank lines. The types of these items, excepting attributes, depends not only on the code used to create them, but the current definition mode of the implementation.
 
 #### Text Mode
