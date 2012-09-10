@@ -47,13 +47,17 @@ Namespaces are a logical abstraction for grouping available data and code into h
 
 ## Syntax
 
-### Definition Modes
+The Xenos syntax follows a simple hierarchy: higher level structure followed by content. If text documents are sequences of paragraphs, Xenos source files are sequences of code and data blocks. In the case of literate programming, Xenos source files are paired sequences of one data block, consisting of markup content, followed immediately by one code block. To distinguish between these two types of blocks, implementations must implement the following section on interpretative modes.
 
-> Are these items blocks? Text Blocks are built-in Data Blocks. Code Blocks are the other block type?
+### Interpretative Modes
 
-Xenos source files are lists of items delimited by blank lines. The types of these items, excepting attributes, depends not only on the code used to create them, but the current definition mode of the implementation.
+Implementations must implement the two interpretative modes: data and code, which form the basis for all possible content interpretation in Xenos program code.
 
-#### Text Mode
+#### Data Mode
+
+
+
+All source files begin in d
 
 By default, all source files begin in text mode. They are given an implicit **TextModeAttribute** at the beginning of the file. This mode treats all items as implicit textual markup paragraphs, wrapping them with `\paragraph{<item data>}`. Any embedded code expressions, as denoted by unescaped `()`, will evaluate down to text instead of their object representations.
 
