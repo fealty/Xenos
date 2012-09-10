@@ -55,7 +55,9 @@ Implementations must implement the two interpretative modes: data and code, whic
 
 #### Data Mode
 
+All interpretation of program code begins in text mode, which is a built-in specialization of data mode designed to handle markup content.  
 
+##### Text Mode
 
 All source files begin in d
 
