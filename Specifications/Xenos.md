@@ -1,5 +1,3 @@
-> Consider just adopting the .NET type system verbatim?
-
 # The Xenos Language Specification
 
 Xenos is *the stranger language* intended to enable programmers to write software via the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by inverting the conventional paradigms of each craft. The remainder of this document describes the Xenos language for implementation by compiler writers. Newbies to the language should read the introductory tutorials first.
@@ -51,47 +49,61 @@ The Xenos syntax follows a simple hierarchy: higher level structure followed by 
 
 ### Interpretative Modes
 
-Implementations must implement the two interpretative modes: data and code, which form the basis for all possible content interpretation in Xenos program code.
+Implementations must implement the two interpretative modes: data and code, which form the basis for all possible content interpretation in Xenos program code. Specialized attributes are used to switch between modes. Modes are terminated by a sequence of two blank lines or the end of file, which instructs the compiler to return to previous mode.
 
 #### Data Mode
 
-All interpretation of program code begins in text mode, which is a built-in specialization of data mode designed to handle markup content.  
+All interpretation of program code begins in text mode, which is a built-in specialization of data mode designed to handle markup content. Data mode enables the compiler to interpret data content within Xenos source files. Users may implement custom data modes by reimplementing `DataModeAttribute` and `DataModeProvider`.
 
 ##### Text Mode
 
-All source files begin in d
-
-By default, all source files begin in text mode. They are given an implicit **TextModeAttribute** at the beginning of the file. This mode treats all items as implicit textual markup paragraphs, wrapping them with `\paragraph{<item data>}`. Any embedded code expressions, as denoted by unescaped `()`, will evaluate down to text instead of their object representations.
-
-> We have two broad goals in mind for Xenos: you can write a novel in it; you can write a video game in it. By choosing text mode as the default, we enable not only writing novels but encourage programmers to use literate programming to write their software. We allow embedded code expressions to allow for REPL and any kind of advanced text generation like a unit test report.
+This built-in mode treats all items as implicit textual markup, implicitly wrapping them in `{paragraph: <textual content>}` blocks. Any embedded code expressions, as denoted by unescaped parentheses, will evaluate down to text content instead of their respective object representations.
 
 #### Code Mode
 
-When implementations encounter an attribute derived from **CodeModeAttribute**, implementations will switch to code mode. This mode treats all items exactly as they appear. Unlike text mode, code mode does not wrap items in any implicit context. This forbids writing paragraphs unless they are enclosed by an explicit `\paragraph{}`, but it allows code objects to evaluate to their object representations. When implementations encounter two or more consecutive blank lines, implementations must switch back to text mode. The end of files may also end the mode.
+This built-in mode treats all items as Xenos source code. It does not implicitly wrap anything. All expressions will evaluate down to their object representations.
 
-> Text mode alone doesn't allow us to create programs because everything evaluates to text, not executable code. Code mode allows us to define functions on modules, types on modules, in addition to data like lists and hash tables. You know, the stuff that should actually get compiled.
+##### Relationship to Text Mode
 
-#### Data Mode
-
-When implementations encounter an attribute derived from **DataModeAttribute**, implementations will switch to data mode. This mode treats all of the content as a verbatim string by default, but users can supply a **DataModeProvider** that provides an interface to the data. This interface can be accessed elsewhere in the source files. When implementations encounter three or more consecutive blank lines, implementations must switch back to text mode. The end of files may also end the mode.
-
-> We intend to allow the embedding of any textual content within source files. Users can embed XML data or code from another language if they wish. Our **DataModeProvider** enables code to access non-Xenos data at compile time through Xenos interfaces. We believe this is a very useful feature. This may be a generalization of text mode. If possible, we should look into implementing text mode through the use of data mode.
+For convenience, Xenos treats text markup as a first class feature of the language. Textual markup can be included within code by explicitly placing textual content within a `paragraph` or other markup construct: `{paragraph: <content>}`.
 
 ### Everything is a Function Call
 
-All Xenos syntax transforms down into built-in and user-defined function calls. 
+All Xenos syntax transforms down into built-in and user-defined function or method calls. 
 
-#### Basic Function Form
+#### Basic Call Form
 
-The basic form of all function calls is defined as follows within opening and closing parentheses: zero or more *attributes*, each enclosed by a set of brackets; one or more characters of white space if attributes are given; the *function identifier* for the function being called; one or more characters of white space; zero or more *optional arguments*, each enclosed by a set of brackets; one or more characters of white space if optional arguments are given; and zero or more *required arguments*.
+	[<optional attribute>]* (<function identifier> [<optional parameter>]*: <function arguments>*)
 
-```
-([<attribute>]* <function-identifier> [<optional-argument>]* <required-arguments>*)
-```
+The basic form of all function and method calls consists of zero or more *optional attributes*, an opening parenthesis, the *function identifier* identifier, zero or more *optional parameters*, a terminating colon, zero or more position-dependent *function arguments*, and a closing parenthesis.
 
-> We chose s-expressions because they are easy to parse. In order to support assigning attributes to arbitrary data structures---methods, parameters, member variables, etc.---we have chosen to allow attributes to be given in the s-expression and passed along to the function when evaluation occurs. This allows attributes to be used on s-expressions at compile time and pass through to arbitrary objects for application to compilation.
+##### Optional Attributes
+
+Every expression in Xenos can have zero or more attributes applied, which may take effect at compile time or runtime depending on the attribute. See also: *Attribute Form*.
+
+##### Function Identifier
+
+	<optional module or type name>.*<method or function name>
+
+The function identifier consists of zero or more typenames denoted by the dot separator and the method or function name to call on the module or type.
+
+##### Optional Parameters
+
+	[<parameter identifier> <expression>]
+
+Functions and methods may define parameters with default values. To call the function or method with a value other than the default, one must provide an optional parameter. This consists of the *parameter identifier*, one or more whitespace characters, and the *expression* to assign to the parameter as its new value. All of this must be enclosed within square brackets. 
+
+##### Function Arguments
+
+	<expression> *
+
+The positional arguments provided to a function or method must consist of zero or more *expression*s delimited by one or more whitespace characters. 
 
 #### Attribute Form
+
+	[@<attribute type> [<optional parameter>]*: <args>*]
+
+
 
 To make attributes distinct from normal function calls, implementations must implement the attribute form in addition to the basic form as follows: the *at-sign* followed immediately by the *attribute type*; one or more white space characters; zero or more *optional arguments*; one or more white space characters if optional arguments are given; zero or one parenthetical set enclosing zero or more *required arguments*.
 
@@ -152,3 +164,4 @@ This form transforms down into the following immediately after the AST is built 
 
 > We need a way to include chunks of code by name, so we devised the replacement form as a special function call always evaluated immediately after an module item's AST is fully built. This enables users to include chunks of AST from within the module and from dependent modules.
 
+> Consider just adopting the .NET type system verbatim?
