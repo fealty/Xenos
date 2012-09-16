@@ -69,7 +69,7 @@ For convenience, Xenos treats text markup as a first class feature of the langua
 
 ### Everything is a Function Call
 
-All Xenos syntax transforms down into built-in and user-defined function or method calls. 
+All Xenos syntax transforms down into built-in and user-defined function or method calls. These calls may occur at runtime or compile time depending on what attributes, if any, are applied to a given function or method.
 
 #### Basic Call Form
 
@@ -101,67 +101,51 @@ The positional arguments provided to a function or method must consist of zero o
 
 #### Attribute Form
 
-	[@<attribute type> [<optional parameter>]*: <args>*]
+	[@<attribute type> [<optional parameter>]*: <construction argument>*]
 
+Every attribute application is enclosed within square brackets. These applications consist of an at-sign followed immediately by the *attribute type*, zero or more *optional parameter*s, a terminating colon, and zero or more *construction arguments*. There exists one restriction one attributes: They cannot be applied to other attributes.
 
+##### Transformation to Basic Call Form
 
-To make attributes distinct from normal function calls, implementations must implement the attribute form in addition to the basic form as follows: the *at-sign* followed immediately by the *attribute type*; one or more white space characters; zero or more *optional arguments*; one or more white space characters if optional arguments are given; zero or one parenthetical set enclosing zero or more *required arguments*.
+	(new [<optional parameter>]*: <attribute type> <construction argument>*)
 
-```
-@<attribute-type> [<optional-arguments>]* (<required-arguments>*)?
-```
-
-The attribute form transforms into the basic construction form as follows:
-
-```
-(new <attribute-type> <optional-arguments> <required-arguments>)
-```
-
-> We wanted attributes to stand out in both code and text. They also needed a unique syntactic sugar to avoid having to new them manually.
+Once transformed into *Basic Call Form*, the attribute expression can be evaluated like any other expression.
 
 #### Text Markup Form
 
-Xenos programs require large amounts of text. For this purpose, implementations must implement the text markup form as follows: a single backslash followed by the *markup type*; zero or more spaces; zero or more *optional arguments*, each enclosed by a set of brackets; zero or more spaces; a set of braces if *nested markup* is given.
+	[<optional attribute>]* {<markup type> [<optional parameter>]*: <markup content>}
 
-```
-\<markup-type> [<optional-arguments>]* {<nested-markup>}?
-```
+The text markup form consists of zero or more *optional attribute*s followed by an opening brace, the *markup type* construct, zero or more *optional parameter*s, a terminating colon, zero or more items of *markup content*, and a closing brace.
 
-The text markup form itself transforms down into the following:
+##### Markup Content
 
-```
-(new <markup-type> <optional-arguments> <required arguments>)
-```
+All markup content consists of plain text that may contain evaluatable Xenos expressions found enclosed within parentheses or nested markup constructs.
 
-For example, consider the following line of nested markup:
+##### Transformation to Basic Call Form
 
-```
-\paragraph{Hello, this is a paragraph of \emphasize{nested markup} text.}
-```
+	[<optional attribute>]* (new [<optional parameter>]*: <markup type> <markup content>)
 
-The markup form treats everything aside from other forms as text, so in basic form, the above becomes as follows:
+Consider the following example of nested markup content:
 
-```
-(new paragraph “Hello, this is a paragraph of ” 
-  (new emphasize “nested markup”) “text.”)
-```
+	{paragraph: Hello, this is a paragraph of {emphasize: nested markup} text.}
 
-> We needed a way to build trees of text markup. The text markup form easily enables this, solving the problem of including large amounts of semantic text.
+Aside from evaluatable Xenos expressions and nested markup constructs, the markup form treats all other content as text, so in basic form, the above example transforms to what follows:
 
-#### Replacement Form
+	(new: paragraph "Hello, this is a paragraph of "
+		(new: emphasize "nested markup") "text.")
 
-To enable literate programming within modules, implementations must provide the s-expression replacement form, which is defined as follows: the dollar sign followed by a *function* that returns an s-expression; zero or more spaces; zero or more *optional arguments*, each enclosed in a set of brackets; zero or more spaces; zero or one set of parentheses having zero or more *required arguments* enclosed. 
+#### Syntactic Sugar
 
-```
-$<function> [<optional-arguments>]* (<required-arguments>)?
-```
+Some common operations in Xenos have syntactic sugar to shorten the amount of code required to complete an operation.
 
-This form transforms down into the following immediately after the AST is built for its containing module item:
+##### Inferred Instance Constructor
 
-```
-(<function> [<optional arguments>]* <required-arguments>)
-```
+	(<construction arguments>*)
 
-> We need a way to include chunks of code by name, so we devised the replacement form as a special function call always evaluated immediately after an module item's AST is fully built. This enables users to include chunks of AST from within the module and from dependent modules.
+The above syntactic sugar transforms into basic call form as follows:
+
+	(new: <inferred type> <construction arguments>)
+
+---------------------------------------------------------------
 
 > Consider just adopting the .NET type system verbatim?
