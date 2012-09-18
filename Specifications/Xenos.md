@@ -97,13 +97,13 @@ Functions and methods may define parameters with default values. To call the fun
 
 	<expression> *
 
-The positional arguments provided to a function or method must consist of zero or more *expression*s delimited by one or more whitespace characters. 
+The positional arguments provided to a function or method must consist of zero or more *expressions* delimited by one or more whitespace characters. 
 
 #### Attribute Form
 
 	[@<attribute type> [<optional parameter>]*: <construction argument>*]
 
-Every attribute application is enclosed within square brackets. These applications consist of an at-sign followed immediately by the *attribute type*, zero or more *optional parameter*s, a terminating colon, and zero or more *construction arguments*. There exists one restriction one attributes: They cannot be applied to other attributes.
+Every attribute application is enclosed within square brackets. These applications consist of an at-sign followed immediately by the *attribute type*, zero or more *optional parameters*, a terminating colon, and zero or more *construction arguments*. There exists one restriction one attributes: They cannot be applied to other attributes.
 
 ##### Transformation to Basic Call Form
 
@@ -115,7 +115,7 @@ Once transformed into *Basic Call Form*, the attribute expression can be evaluat
 
 	[<optional attribute>]* {<markup type> [<optional parameter>]*: <markup content>}
 
-The text markup form consists of zero or more *optional attribute*s followed by an opening brace, the *markup type* construct, zero or more *optional parameter*s, a terminating colon, zero or more items of *markup content*, and a closing brace.
+The text markup form consists of zero or more *optional attributes* followed by an opening brace, the *markup type* construct, zero or more *optional parameters*, a terminating colon, zero or more items of *markup content*, and a closing brace.
 
 ##### Markup Content
 
