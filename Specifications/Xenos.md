@@ -145,6 +145,10 @@ Some common operations in Xenos have syntactic sugar to shorten the amount of co
 The above syntactic sugar transforms into basic call form as follows:
 
 	(new: <inferred type> <construction arguments>)
+	
+#### Character Escaping
+
+Characters recognized as part of Xenos syntax can be escaped by prefixing them with a single backslash. Examples: `\{`, `\\`, `\(`. 
 
 ---------------------------------------------------------------
 
