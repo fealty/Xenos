@@ -19,10 +19,10 @@ Next, we need to define an entry point for our application. We do this by invoki
   
 {section: The Chunks}
   
-Then we define the single {type: list<T>} of parameters to take in our command line arguments.
+Then we define the single {type: string[]} of parameters to take in our command line arguments.
 
 (def-chunk: "define parameters"
-  (in: list<string> args))
+  (in: string[] args))
   
 Finally, we output the "Hello World" message to the console and return.
 
