@@ -153,3 +153,5 @@ Characters recognized as part of Xenos syntax can be escaped by prefixing them w
 ---------------------------------------------------------------
 
 > Consider just adopting the .NET type system verbatim?
+
+// We begin with the metadata for the module. Attributes apply to the next non-attribute s-expression within the block, but if no non-attribute s-expression exists in the block, the attribute applies to the module itself.
