@@ -1,35 +1,27 @@
-// We begin with the metadata for the module. Attributes apply to the next non-attribute s-expression within the block, but if no non-attribute s-expression exists in the block, the attribute applies to the module itself.
-
 [@author: "Fealty"]
 [@date: "12/17/2012"]
+[@title: {paragraph: {quote: Hello World!} in Xenos}]
 
-{section: The Setup}
+{section: The {quote: Hello World!} Program}
 
-First, we need to declare our dependencies to enable the compiler to find the {method: Console.WriteLine} method.
+Our goal in this program is to print the text {quote: Hello World!} to the console. We need to use the console I/O functionality in the core .NET library to accomplish this task. We have to declare our dependencies for the module, so the Xenos compiler can use the proper {method: Console.WriteLine} method. We accomplish this by importing the logical {namespace: System} namespace.
 
 (import: System)
 
-Next, we need to define an entry point for our application. We do this by invoking {function: def-function} at compile time. Essentially, we are writing code that generates code. 
+The master module of every Xenos program must define the entry point for the application. The Xenos compiler looks for the existence of a private and static function called {emphasize: Main} that returns an integer within the module. We must define this function by calling the {function: def-function} function.
 
-// Note: The import-chunk function executes once the s-expression is understood, so the 'import-chunk' function s-expression replaces itself with the s-expressions in the chunk.
+(def-function: private static int Main
+	(in-param: list<string> args)
+	(get-chunk: "output and return"))
 
-(def-function: int main
-  (import-chunk: "define parameters")
-  (import-chunk: "output and return"))
-  
-{section: The Chunks}
-  
-Then we define the single {type: list<T>} of parameters to take in our command line arguments.
+{section: Breaking Down the Body}
 
-(def-chunk: "define parameters"
-  (in: list<string> args))
-  
-Finally, we output the "Hello World" message to the console and return.
+We call the {method: Console.WriteLine} to output our desired text to the console output stream. Then we return from our function, ending the program.
 
 (def-chunk: "output and return"
-	(Console.WriteLine: "Hello World")
+	(Console.WriteLine: "Hello World!")
 	(return: 0))
 
 {section: Conclusion}
 
-You should now understand how to write "Hello World" in xenos.
+You should now understand how to write the classic {quote: Hello World!} program in Xenos.
