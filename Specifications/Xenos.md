@@ -127,7 +127,7 @@ All markup content consists of plain text that may contain evaluatable Xenos exp
 
 Consider the following example of nested markup content:
 
-	{paragraph: Hello, this is a paragraph of {emphasize: nested markup} text.}
+	`paragraph: Hello, this is a paragraph of `emphasize: nested markup` text.`
 
 Aside from evaluatable Xenos expressions and nested markup constructs, the markup form treats all other content as text, so in basic form, the above example transforms to what follows:
 
@@ -155,3 +155,17 @@ Characters recognized as part of Xenos syntax can be escaped by prefixing them w
 > Consider just adopting the .NET type system verbatim?
 
 // We begin with the metadata for the module. Attributes apply to the next non-attribute s-expression within the block, but if no non-attribute s-expression exists in the block, the attribute applies to the module itself.
+
+---------------
+
+Shortcuts: `(<function name>)`, ``<paragraph text>``, `[@<attribute>]`
+
+consider using backticks or quotation marks instead of `{}` for textual content
+
+use attributes for textual environments? end environments with an "end" attribute
+
+https://gist.github.com/fealty/1b8345fb8fcb1e2c3161
+
+if attributes begin a block, they apply at the block level?
+
+https://gist.github.com/fealty/29c3d553cd7c1c1cd931
