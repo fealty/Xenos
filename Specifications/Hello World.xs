@@ -8,11 +8,11 @@ Our goal in this program is to print the text {speech: Hello World!} to the cons
 
 (import: System)
 
-The master module of every Xenos program must define the entry point for the application. The Xenos compiler looks for the existence of a private function called {emphasize: main} that returns an integer within the master module. We must define this function by calling the {function: def-function} function.
+The master module of every Xenos program must define the entry point for the application. The Xenos compiler looks for the existence of a private function called {emphasize: Main} that returns an integer within the master module. We must define this function by calling the {function: define} function.
 
-(defun: private int main
-	(defparam: list<string> args)
-	(autochunk))
+(define: private static Main
+	(lambda: int (new: parameters (new: parameter list<string> args))
+		(autochunk)))
 
 [chunk: "output and return"]
 
