@@ -43,32 +43,25 @@ Modules are named scopes that list available code and data items. Every Xenos pr
 
 Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file `./Frost Test/Shaping.xns`, implementations will determine that the Shaping module resides within the `Frost_Test.Shaping` namespace. Implementations must maintain lists of all namespaces available in referenced libraries and in the physical structure of the current project.
 
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
 ## Syntax
 
-The Xenos syntax follows a simple hierarchy: higher level structure followed by content. If text documents are sequences of paragraphs, Xenos source files are sequences of code and data blocks. In the case of literate programming, Xenos source files are paired sequences of one data block, consisting of markup content, followed immediately by one code block. To distinguish between these two types of blocks, implementations must implement the following section on interpretative modes.
+The Xenos syntax follows a tree hierarchy: If text documents are sequences of paragraphs, Xenos source files are nested sequences of code and text blocks. To distinguish between these two types of blocks, implementations must implement the following section on blocks.
 
-### Interpretative Modes
+### Blocks
 
-Implementations must implement the two interpretative modes: data and code, which form the basis for all possible content interpretation in Xenos program code. Specialized attributes are used to switch between modes. Modes are terminated by a sequence of two blank lines or the end of file, which instructs the compiler to return to previous mode.
+Blocks are collections of content delimited by blank lines in Xenos source files. Implementations must implement the two block types: text and code. The type of a block is determined by its content after leading attribute expressions if any leading attribute expressions are present.
 
-#### Data Mode
+#### Text Block
 
-All interpretation of program code begins in text mode, which is a built-in specialization of data mode designed to handle markup content. Data mode enables the compiler to interpret data content within Xenos source files. Users may implement custom data modes by reimplementing `DataModeAttribute` and `DataModeProvider`.
+Text blocks are collections of nested text expressions. Implementations must assume that all blocks contain text expressions unless a code expression occurs first after any attribute expressions. The content of a text block must descend as children of an implicit `paragraph` markup object. All embedded code expressions must evaluate down to text instead of their respective object representations.
 
-##### Text Mode
+#### Code Block
 
-This built-in mode treats all items as implicit textual markup, implicitly wrapping them in `{paragraph: <textual content>}` blocks. Any embedded code expressions, as denoted by unescaped parentheses, will evaluate down to text content instead of their respective object representations.
+Code blocks are collections of nested code expressions, which the compiler must evaluate. Implementations must evaluate blocks as code blocks if a code expression occurs first after any attribute expressions. All embedded text expressions must evaluate down to objects instead of their respective textual representations.
 
-#### Code Mode
-
-This built-in mode treats all items as Xenos source code. It does not implicitly wrap anything. All expressions will evaluate down to their object representations.
-
-##### Relationship to Text Mode
-
-For convenience, Xenos treats text markup as a first class feature of the language. Textual markup can be included within code by explicitly placing textual content within a `paragraph` or other markup construct: `{paragraph: <content>}`.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 ### Everything is a Function Call
 
@@ -172,3 +165,5 @@ https://gist.github.com/fealty/1b8345fb8fcb1e2c3161
 if attributes begin a block, they apply at the block level?
 
 https://gist.github.com/fealty/29c3d553cd7c1c1cd931
+
+((use .NET attributes in assemblies compiled from Xenos code to assign the Xenos-only name to classes and modules and functions))
