@@ -1,6 +1,6 @@
 # The Xenos Language Specification
 
-Xenos is *the stranger language* intended to enable programmers to write software via the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by inverting the conventional paradigms of each craft. The remainder of this document describes the Xenos language for implementation by compiler writers. Newbies to the language should read the introductory tutorials first.
+Xenos is *the stranger language* intended to enable programmers to write software via the literate programming paradigm and enable non-programmers to author documents using a friendly yet customizable markup language. Xenos programs are documents first, programs second. This core philosophy allows Xenos to meet the needs of both programmers and writers by inverting the conventional paradigms of each craft. The remainder of this document describes the Xenos language for implementation by compiler writers. 
 
 ## Program Structure
 
@@ -12,20 +12,20 @@ Xenos programs maintain consistency between the native file system representatio
 
 #### Source Files
 
-Source files are UTF-8 text files (without the byte order mark), containing Xenos source code, that have the `.xs` file extension. Implementations must accept source file names as the default argument to compiler invocation from the command line, and they may provide additional input paths. When processing the given source files, implementations must error when they encounter any of the following conditions:
+Source files are UTF-8 text files (without the byte order mark), containing Xenos source code, that have the `.xns` file extension. Implementations must accept source file names as the default argument to compiler invocation from the command line, and they may provide additional input paths. When processing the given source files, implementations must error when they encounter any of the following conditions:
 
 * One or more source inputs contain byte order marks.
 * One or more source inputs use non-UTF-8 encoding schemes.
-* One or more source inputs lack the `.xs` file extension.
+* One or more source inputs lack the `.xns` file extension.
 * One or more related failures as determined by the implementation.
 
 #### Modules
 
-Modules group related code and data as determined by programmers or writers. Modules are not source files; source files *describe* modules. Modules are primarily logical but derive their identifiers from the physical source files: Implementations must derive module identifiers by stripping the file system path, stripping the file extension, and replacing all lexically invalid identifier characters with underscores. For example, given the source file `My File.xdoc.xs`, implementations will derive `My_File_xdoc` as the module identifier.
+Modules group related code and data as determined by programmers or writers. Modules are not source files; source files *describe* modules. Modules are primarily logical but derive their identifiers from the physical source files: Implementations must derive module identifiers by stripping the file system path, stripping the file extension, and replacing all lexically invalid identifier characters with underscores. For example, given the source file `My File.xdoc.xns`, implementations will derive `My_File_xdoc` as the module identifier.
 
 #### Namespaces
 
-Namespaces, like file system directories, group things. As such, implementations must treat directories as namespaces. The root directories of projects represent the global namespace for each project. Directories within the root directories form the physical namespace hierarchies for projects. Implementations must derive namespace identifiers from directory names by stripping the file system path relative to the current directory and replacing all lexically invalid identifier characters with underscores. For example, give the source file `./Frost Test/Shaping.xs`, implementations will determine that the `Shaping` module resides within the `Frost_Test` namespace.
+Namespaces, like file system directories, group things. As such, implementations must treat directories as namespaces. The root directories of projects represent the global namespace for each project. Directories within the root directories form the physical namespace hierarchies for projects. Implementations must derive namespace identifiers from directory names by stripping the file system path relative to the current directory and replacing all lexically invalid identifier characters with underscores. For example, given the source file `./Frost Test/Shaping.xns`, implementations will determine that the `Shaping` module resides within the `Frost_Test` namespace.
 
 #### Libraries
 
@@ -41,7 +41,7 @@ Modules are named scopes that list available code and data items. Every Xenos pr
 
 #### Namespaces
 
-Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file `./Frost Test/Shaping.xs`, implementations will determine that the Shaping module resides within the `Frost_Test.Shaping` namespace. Implementations must maintain lists of all namespaces available in referenced libraries and in the physical structure of the current project.
+Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file `./Frost Test/Shaping.xns`, implementations will determine that the Shaping module resides within the `Frost_Test.Shaping` namespace. Implementations must maintain lists of all namespaces available in referenced libraries and in the physical structure of the current project.
 
 ## Syntax
 
