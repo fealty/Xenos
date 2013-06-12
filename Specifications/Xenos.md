@@ -43,6 +43,9 @@ Modules are named scopes that list available code and data items. Every Xenos pr
 
 Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file `./Frost Test/Shaping.xns`, implementations will determine that the Shaping module resides within the `Frost_Test.Shaping` namespace. Implementations must maintain lists of all namespaces available in referenced libraries and in the physical structure of the current project.
 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 ## Syntax
 
 The Xenos syntax follows a simple hierarchy: higher level structure followed by content. If text documents are sequences of paragraphs, Xenos source files are sequences of code and data blocks. In the case of literate programming, Xenos source files are paired sequences of one data block, consisting of markup content, followed immediately by one code block. To distinguish between these two types of blocks, implementations must implement the following section on interpretative modes.
