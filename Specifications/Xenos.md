@@ -59,53 +59,43 @@ Text blocks are collections of nested text expressions. Implementations must ass
 
 Code blocks are collections of nested code expressions, which the compiler must evaluate. Implementations must evaluate blocks as code blocks if a code expression occurs first after any attribute expressions. All embedded text expressions must evaluate down to objects instead of their respective textual representations.
 
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
 ### Everything is a Function Call
 
-All Xenos syntax transforms down into built-in and user-defined function or method calls. These calls may occur at runtime or compile time depending on what attributes, if any, are applied to a given function or method.
+All Xenos syntax transforms down into built-in and user-defined function or method calls. These calls may occur at compile time or at runtime in the executable program. 
 
-#### Basic Call Form
+#### Code Expression
 
-	[<optional attribute>]* (<function identifier> [<optional parameter>]*: <function arguments>*)
+	(<function identifier>: <function argument>*)
 
-The basic form of all function and method calls consists of zero or more *optional attributes*, an opening parenthesis, the *function identifier* identifier, zero or more *optional parameters*, a terminating colon, zero or more position-dependent *function arguments*, and a closing parenthesis.
-
-##### Optional Attributes
-
-Every expression in Xenos can have zero or more attributes applied, which may take effect at compile time or runtime depending on the attribute. See also: *Attribute Form*.
+The basic form of all function and method calls, which are code expressions, consists of an opening parenthesis, the _function identifier_, a colon, zero or more position-dependent _function arguments_, and a closing parenthesis.
 
 ##### Function Identifier
 
-	<optional module or type name>.*<method or function name>
+	<typename or namespace>.*<method or function name>
 
-The function identifier consists of zero or more typenames denoted by the dot separator and the method or function name to call on the module or type.
-
-##### Optional Parameters
-
-	[<parameter identifier> <expression>]
-
-Functions and methods may define parameters with default values. To call the function or method with a value other than the default, one must provide an optional parameter. This consists of the *parameter identifier*, one or more whitespace characters, and the *expression* to assign to the parameter as its new value. All of this must be enclosed within square brackets. 
+The function identifier consists of zero or more typenames or namespaces or combinations of both denoted by the dot separator and the method or function name to call.
 
 ##### Function Arguments
 
 	<expression> *
 
-The positional arguments provided to a function or method must consist of zero or more *expressions* delimited by one or more whitespace characters. 
+The positional arguments provided to a function or method must consist of zero or more _expressions_ delimited by one or more whitespace characters. 
 
-#### Attribute Form
+#### Attribute Expression
 
-	[@<attribute type> [<optional parameter>]*: <construction argument>*]
+	[<attribute typename>: <construction argument>*]
 
-Every attribute application is enclosed within square brackets. These applications consist of an at-sign followed immediately by the *attribute type*, zero or more *optional parameters*, a terminating colon, and zero or more *construction arguments*. There exists one restriction one attributes: They cannot be applied to other attributes.
+Every code or text expression in Xenos can have zero or more attributes, which may change compile time or runtime behavior or tag data to an expression. Every attribute expression consists of a opening square bracket, the _attribute typename_, a colon, zero or more _construction arguments_, and a closing square bracket. If a block contains only attribute expressions, these expressions apply to the module. If a block begins with attribute expressions, these expressions apply to the block. In all other cases, the attribute expression applies to the following code or text expression.
 
-##### Transformation to Basic Call Form
+##### Transformation to Code
 
-	(new [<optional parameter>]*: <attribute type> <construction argument>*)
+	(new: <attribute typename> <construction argument>*)
 
-Once transformed into *Basic Call Form*, the attribute expression can be evaluated like any other expression.
+After being transformed into a code expression, the transformed attribute expression can be evaluated like any other code expression.
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 #### Text Markup Form
 
