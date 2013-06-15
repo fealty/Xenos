@@ -126,35 +126,20 @@ Aside from evaluatable Xenos code and text expressions, the text expression trea
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
--------------------------------------------------------------------------------
 
-#### Syntactic Sugar
+### Literal Types
 
-Some common operations in Xenos have syntactic sugar to shorten the amount of code required to complete an operation.
+#### Strings
 
-##### Inferred Instance Constructor
+#### Numbers
 
-	(<construction arguments>*)
-
-The above syntactic sugar transforms into basic call form as follows:
-
-	(new: <inferred type> <construction arguments>)
-	
 #### Character Escaping
 
-Characters recognized as part of Xenos syntax can be escaped by prefixing them with a single backslash. Examples: `\{`, `\\`, `\(`. 
+Characters recognized as part of Xenos syntax can be escaped by prefixing them with a single backslash. Examples: `\{`, `\\`, `\(`, `\[`. 
 
----------------------------------------------------------------
-
-> Consider just adopting the .NET type system verbatim?
-
-// We begin with the metadata for the module. Attributes apply to the next non-attribute s-expression within the block, but if no non-attribute s-expression exists in the block, the attribute applies to the module itself.
-
----------------
-
-Shortcuts: `(<function name>)`, ``<paragraph text>``, `[@<attribute>]`
-
-consider using backticks or quotation marks instead of `{}` for textual content
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 use attributes for textual environments? end environments with an "end" attribute
 
