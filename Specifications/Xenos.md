@@ -67,7 +67,9 @@ All Xenos syntax transforms down into built-in and user-defined function or meth
 
 	(<function identifier>: <function argument>*)
 
-The basic form of all function and method calls, which are code expressions, consists of an opening parenthesis, the _function identifier_, a colon, zero or more position-dependent _function arguments_, and a closing parenthesis.
+The basic form of all function and method calls, which are code expressions, consists of an opening parenthesis, the _function identifier_, a colon, zero or more position-dependent _function arguments_, and a closing parenthesis. When a code expression is embedded in a text expression, the code is evaluated to its textual representation.
+
+> & Allow _function identifier_ to be an expression that resolves to an method or function name?
 
 ##### Function Identifier
 
@@ -87,38 +89,44 @@ The positional arguments provided to a function or method must consist of zero o
 
 Every code or text expression in Xenos can have zero or more attributes, which may change compile time or runtime behavior or tag data to an expression. Every attribute expression consists of a opening square bracket, the _attribute typename_, a colon, zero or more _construction arguments_, and a closing square bracket. If a block contains only attribute expressions, these expressions apply to the module. If a block begins with attribute expressions, these expressions apply to the block. In all other cases, the attribute expression applies to the following code or text expression.
 
+> & Allow _attribute typename_ to be an expression that resolves to an attribute typename?
+
 ##### Transformation to Code
 
 	(new: <attribute typename> <construction argument>*)
 
 After being transformed into a code expression, the transformed attribute expression can be evaluated like any other code expression.
 
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
+#### Text Expression
 
-#### Text Markup Form
+	{<text typename>: <text content>}
 
-	[<optional attribute>]* {<markup type> [<optional parameter>]*: <markup content>}
+The text expression consists of an opening curly brace, the _text typename_, a colon, zero or more items of _text content_, and a closing curly brace. When a text expression is embedded in a code expression, the text expression is evaluated into its object representation.
 
-The text markup form consists of zero or more *optional attributes* followed by an opening brace, the *markup type* construct, zero or more *optional parameters*, a terminating colon, zero or more items of *markup content*, and a closing brace.
+> & Allow _text typename_ to be an expression that resolves to the typename of a text object?
 
-##### Markup Content
+##### Text Content
 
-All markup content consists of plain text that may contain evaluatable Xenos expressions found enclosed within parentheses or nested markup constructs.
+All text content consists of plain UTF-8 text that may contain evaluatable Xenos code or text expressions. 
 
-##### Transformation to Basic Call Form
+> & Should this implement a very simply markup language? Changing three dashes to a em-dash for instance?
 
-	[<optional attribute>]* (new [<optional parameter>]*: <markup type> <markup content>)
+##### Transformation to Code
+
+	(new: <text typename> <text content>)
 
 Consider the following example of nested markup content:
 
-	`paragraph: Hello, this is a paragraph of `emphasize: nested markup` text.`
+	{paragraph: Hello, this is a paragraph of {emphasize: nested markup} text.}
 
-Aside from evaluatable Xenos expressions and nested markup constructs, the markup form treats all other content as text, so in basic form, the above example transforms to what follows:
+Aside from evaluatable Xenos code and text expressions, the text expression treats all other content as plain text, so as a code expression, the above example transforms to what follows:
 
 	(new: paragraph "Hello, this is a paragraph of "
 		(new: emphasize "nested markup") "text.")
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 #### Syntactic Sugar
 
