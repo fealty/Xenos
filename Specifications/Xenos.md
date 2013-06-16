@@ -131,6 +131,10 @@ Aside from evaluatable Xenos code and text expressions, the text expression trea
 
 #### Strings
 
+
+
+#### Characters
+
 #### Numbers
 
 #### Character Escaping
