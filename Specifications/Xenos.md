@@ -147,6 +147,8 @@ Characters recognized as part of Xenos syntax can be escaped by prefixing them w
 
 use attributes for textual environments? end environments with an "end" attribute
 
+table of contents file is the master document?
+
 https://gist.github.com/fealty/1b8345fb8fcb1e2c3161
 
 if attributes begin a block, they apply at the block level?

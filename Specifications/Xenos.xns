@@ -1,0 +1,84 @@
+{>>assign the Quote type to wrap the content of the quote operator; in a novel, this would be set to 'Speech' instead<<}
+[Markup.Quotes.Type: Quote] 
+
+{>>every document must have a title and at least one author<<}
+{Title: The Xenos Language Specification}
+{Author: Joshua Burke}
+
+{>>begin the main document content<<}
+
+Xenos is {Emphasis: the stranger language}, enabling programmers to write software via the literate programming paradigm and non-programmers to author documents using a friendly yet customizable {--markup language--}. Xenos programs are human-readable and writeable documents first, executable software second. This core philosophy empowers 'Xenos' to meet the needs of both {==programmers and writers==} by inverting the conventional paradigms of each craft. 
+
+{Part: Program Structure}
+
+The structure of Xenos programs consists of two parts: physical structure and logical structure. The {++physical structure++} requirements describe how the arrangement of source files on the native filesystem forms the physical structure. The logical structure requirements describe how the {>>contents of physical<<} elements, such as source files, form the logical structure. These two parts work together to maintain consistency through all editing, compiling, debugging, and reflecting done on Xenos programs.
+
+{Section: Physical Structure}
+
+Xenos programs maintain consistency between the native file system representation and physical structure by deriving their physical structures from the presence or arrangement of source files and directories. This consistency ensures that programs will not accidentally create a physical or logical structure vastly different from how a complex Xenos program is viewed from within source code management solutions like Git.
+
+{Subsection: Source Files}
+
+Source files are UTF-8 text files, without the byte order mark, containing Xenos source code, that have the {FileExtension: xns} file extension. Implementations must accept source file names as the default argument to compiler invocation from the command line, and they may provide additional input paths. When processing the given source files, implementations must error when they encounter any of the following conditions:
+
+{List:	{Item: One or more source inputs contain byte order marks.}
+	{Item: One or more source inputs use non-UTF-8 encoding schemes.}
+	{Item: One or more source inputs lack the {FileExtension: xns} file extension.}
+	{Item: One or more related failures as determined by the implementation.}}
+
+{Subsection: Modules}
+
+Modules group related code and data as determined by programmers or writers. Modules are not source files; source files {Emphasis: describe} modules. Modules are primarily logical but derive their identifiers from the physical source files: Implementations must derive module identifiers by stripping the file system path, stripping the file extension, and replacing all lexically invalid identifier characters with underscores. For example, given the source file {Filename: My File.xdoc.xns}, implementations will derive {Identifier: My_File_xdoc} as the module identifier.
+
+{Subsection: Namespaces}
+
+Namespaces, like file system directories, group things. As such, implementations must treat directories as namespaces. The root directories of projects represent the global namespace for each project. Directories within the root directories form the physical namespace hierarchies for projects. Implementations must derive namespace identifiers from directory names by stripping the file system path relative to the current directory and replacing all lexically invalid identifier characters with underscores. For example, given the source file {FilePath: ./Frost Test/Shaping.xns}, implementations will determine that the {Identifier: Shaping} module resides within the {Identifier: Frost_Test} namespace.
+
+{Subsection: Libraries}
+
+Libraries are .NET assemblies, which may be provided to implementations via a command line switch. Implementations should first check provided assemblies before looking in the global assembly cache. Implementations must expose all provided library members through the use of logical namespaces.
+
+{Section: Logical Structure}
+
+The dependencies between modules, namespaces, and libraries form the logical structure of Xenos programs.
+
+{Subsection: Modules}
+
+Modules are named scopes that list available code and data items. Every Xenos program has one master module that serves as the starting point to compilation, and every module thereafter must be processed only once, regardless of how many modules import each module. By recursively following import declarations, implementations build acyclic dependency trees for Xenos programs. Implementations must detect and emit errors when they encounter cycles between modules.
+
+{Subsection: Namespaces}
+
+Namespaces are a logical abstraction for grouping available data and code into hierarchies. By this definition, the specification treats modules as namespaces in addition to physical directories and available library data. The dot is used to separate namespaces. For example, given the source file {FilePath: ./Frost Test/Shaping.xns}, implementations will determine that the Shaping module resides within the {Identifier: Frost_Test.Shaping} namespace. Implementations must maintain lists of all namespaces available in referenced libraries and in the physical structure of the current project.
+
+{Part: Syntax}
+
+The Xenos syntax follows a tree hierarchy: If text documents are sequences of paragraphs, Xenos source files are nested sequences of code and text blocks. To distinguish between these two types of blocks, implementations must implement the following section on blocks.
+
+{Section: Blocks}
+
+Blocks are collections of content delimited by blank lines in Xenos source files. Implementations must implement the two block types: text and code. The type of a block is determined by its content after leading attribute expressions if any leading attribute expressions are present.
+
+{Subsection: Text Block}
+
+Text blocks are collections of nested text expressions. Implementations must assume that all blocks contain text expressions unless a code expression occurs first after any attribute expressions. The content of a text block must descend as children of an implicit paragraph markup object. All embedded code expressions must evaluate down to text instead of their respective object representations.
+
+{Subsection: Code Block}
+
+Code blocks are collections of nested code expressions, which the compiler must evaluate. Implementations must evaluate blocks as code blocks if a code expression occurs first after any attribute expressions. All embedded text expressions must evaluate down to objects instead of their respective textual representations.
+
+{Subsection: Verbatim Block}
+
+Blocks of textual or content that are indented at least one space or tab are considered verbatim blocks. These blocks are taken in as data. The verbatim block ends at the end of the file or another block having content begins without identation. Verbatim blocks may contain newlines, even multiple blank lines, provided that all sequential verbatim blocks are indented.
+
+{Section: Everything is a Function Call}
+
+All Xenos syntax transforms down into built-in and user-defined function or method calls. These calls may occur at compile time or at runtime in the executable program. 
+
+{Subsection: Code Expression}
+
+	(<function identifier> <function argument>*)
+
+The basic form of all function and method calls, which are code expressions, consists of an opening parenthesis, the _function identifier_, a colon, zero or more position-dependent _function arguments_, and a closing parenthesis. When a code expression is embedded in a text expression, the code is evaluated to its textual representation.
+
+{Blockquote: Numbering of the sections is performed automatically by LaTeX, so don't bother adding them explicitly, just insert the heading you want between the curly braces. Parts get roman numerals. You can change the depth to which section numbering occurs, so you can turn it off selectively. By default it is set to 2. If you only want parts, chapters, and sections numbered, not subsections or subsubsections etc., you can change the value of the secnumdepth counter using the \setcounter command, giving the depth level you wish. For example, if you want to change it to 1:}
+

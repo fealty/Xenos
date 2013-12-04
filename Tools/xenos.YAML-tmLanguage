@@ -1,0 +1,18 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Xenos
+scopeName: text.xenos
+fileTypes: [xns]
+uuid: ef5a16c7-a540-4cc6-b1f2-12f64137e86e
+patterns:
+- comment: match code and text blocks
+  begin: '^(?=\S)'
+  end: '^\s*((\r\n)|(\n))$'
+  patterns:
+  - include: source.xenos.internal
+- comment: match verbatim blocks 
+  begin: '^(?=\s)'
+  end: '^\s*((\r\n)|(\n))$'
+  patterns:
+  - name: markup.raw
+    match: '.'

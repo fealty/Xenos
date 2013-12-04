@@ -1,0 +1,196 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: Xenos Internal
+scopeName: source.xenos.internal
+fileTypes: []
+uuid: 3c7cd947-bc58-454d-9c74-a2c15a8e51fa
+
+patterns:
+- comment: attribute - match illegal double brackets
+  name: invalid.illegal
+  match: '\]\]'
+- comment: attribute - match illegal double brackets
+  name: invalid.illegal
+  match: '\[\['
+
+- comment: text - match removed text critic markup
+  begin: '(?<!\\)(\{\-\-)'
+  end: '(?<!\\)(\-\-\})'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the removed text
+    name: markup.deleted
+    match: '.'
+
+- comment: text - match added text critic markup
+  begin: '(?<!\\)(\{\+\+)'
+  end: '(?<!\\)(\+\+\})'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the added text
+    name: markup.inserted
+    match: '.'
+
+- comment: text - match comment text critic markup
+  begin: '(?<!\\)(\{\>\>)'
+  end: '(?<!\\)(\<\<\})'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the comment text
+    name: comment.block.markup
+    match: '.'
+
+- comment: text - match highlight text critic markup
+  begin: '(?<!\\)(\{\=\=)'
+  end: '(?<!\\)(\=\=\})'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the comment text
+    name: markup.highlight
+    match: '.'
+
+- comment: text - match the section headings
+  begin: '(?<!\\)(\{)(?=Part|Chapter|Section|Subsection|Subsubsection|Paragraph|Subparagraph)'
+  end: '(?<!\\)(\})'
+  name: markup.heading
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - include: $self
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the text element typename
+    name: support.class.element
+    match: '(?<=\{)[^:(\\\{)(\\\})]*(:)?'
+  - comment: section name
+    name: entity.name.section
+    match: .
+
+- comment: text - match the lists
+  begin: '(?<!\\)(\{)(?=List)'
+  end: '(?<!\\)(\})'
+  name: markup.list
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - include: $self
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the text element typename
+    name: support.class.element
+    match: '(?<=\{)[^:(\\\{)(\\\})]*(:)?'
+
+- comment: text - match the quotes
+  begin: '(?<!\\)(\{)(?=Blockquote)'
+  end: '(?<!\\)(\})'
+  name: markup.quote
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - include: $self
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the text element typename
+    name: support.class.element
+    match: '(?<=\{)[^:(\\\{)(\\\})]*(:)?'
+
+- comment: text - match the beginning and ending braces
+  begin: '(?<!\\)(\{)'
+  end: '(?<!\\)(\})'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - include: $self
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the text element typename
+    name: support.class.element
+    match: '(?<=\{)[^:(\\\{)(\\\})]*(:)?'
+
+- comment: double-quoted strings
+  name: markup.quote
+  begin: '(?<!\\)(")'
+  end: '(?<!\\)(")(?!")'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+
+- comment: attribute - match the beginning and ending brackets
+  begin: '(?<!\\)(\[)'
+  end: '(?<!\\)(\])(?!\])'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: string - match quoted strings
+    name: string.quoted.double
+    match: '(?<!\\)"[^"]*"'
+  - include: $self
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: match the attribute typename
+    name: support.class.attribute
+    match: '(?<=\[)[^:(\\\[)(\\\])]*(:)?'
+
+- comment: code - match the beginning and ending parentheses
+  begin: '(?<!\\)(\()'
+  end: '(?<!\\)(\))'
+  beginCaptures:
+    '1': {name: keyword.operator}
+  endCaptures:
+    '1': {name: keyword.operator}
+  patterns:
+  - comment: double-quoted strings
+    name: string.quoted.double
+    match: '(?<!\\)"[^"]*"'
+  - include: $self
+  - comment: illegal block crossings
+    name: invalid.illegal
+    match: '^\s*((\r\n)|(\n))$'
+  - comment: function name being called
+    name: support.function
+    match: '(?<=\()[^\s(\\\()(\\\))]*'
+...

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>xns</string>
+	</array>
+	<key>name</key>
+	<string>Xenos</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>^(?=\S)</string>
+			<key>comment</key>
+			<string>match code and text blocks</string>
+			<key>end</key>
+			<string>^\s*((\r\n)|(\n))$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.xenos.internal</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>^(?=\s)</string>
+			<key>comment</key>
+			<string>match verbatim blocks</string>
+			<key>end</key>
+			<string>^\s*((\r\n)|(\n))$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>.</string>
+					<key>name</key>
+					<string>markup.raw</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>text.xenos</string>
+	<key>uuid</key>
+	<string>ef5a16c7-a540-4cc6-b1f2-12f64137e86e</string>
+</dict>
+</plist>
